@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Myynd: Where Systems Become Intelligent</title>
+    <link rel="icon" href="assets/myynd-mark-navy.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;750&family=Outfit:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=glass2" />
+  </head>
+  <body>
+    <div class="stage">
+    <div class="stage-sticky">
+    <div class="bg" aria-hidden="true">
+      <video class="bg-video" autoplay muted loop playsinline poster="assets/bg-blue-orange-poster.jpg?v=warm">
+        <source src="assets/bg-blue-orange.mp4?v=warm" type="video/mp4" />
+      </video>
+    </div>
+
+    <div class="page">
+      <header class="header">
+        <div class="bar">
+          <nav class="bar-links" aria-label="Primary">
+            <a href="#">Product</a>
+            <a href="#">How it works</a>
+          </nav>
+
+          <a href="#" class="brand" aria-label="Myynd home">
+            <img src="assets/myynd-mark-ivory.svg" alt="" width="22" height="22" />
+            <span class="brand-word">myynd</span>
+          </a>
+
+          <nav class="bar-links bar-links-right" aria-label="Company">
+            <a href="#">Case studies</a>
+            <a href="#">Contact</a>
+          </nav>
+        </div>
+
+        <button
+          class="dots"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
+        </button>
+      </header>
+
+      <div class="menu-overlay" hidden></div>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile" hidden>
+        <a href="#" class="m-link" style="--i: 0">Product</a>
+        <a href="#" class="m-link" style="--i: 1">How it works</a>
+        <a href="#" class="m-link" style="--i: 2">Case studies</a>
+        <a href="#" class="m-link" style="--i: 3">Contact</a>
+      </nav>
+
+      <main class="hero">
+        <div class="trust anim" style="--d: 0.05s">
+          <span class="trust-pill">Trusted by the top players in the space</span>
+        </div>
+
+        <h1 class="headline anim">
+          <span class="line l1">Myynd: Where Systems</span>
+          <span class="line l2">Become Intelligent.</span>
+        </h1>
+
+        <p class="subhead anim" style="--d: 0.28s">
+          Your company’s know-how, turned into answers and finished work.
+          Nobody waits on the one person who knows.
+        </p>
+
+        <a href="#" class="cta anim anim-pulse" style="--d: 0.4s">Get Started</a>
+      </main>
+
+    </div>
+
+    <div class="showcase">
+      <figure class="showcase-card">
+        <img src="assets/app-home.webp" width="2880" height="1800" alt="The Myynd desk: invoices filed, replies drafted and incoming documents sorted, waiting for review" />
+      </figure>
+    </div>
+    </div>
+    </div>
+
+    <section class="next">
+      <div class="next-inner">
+        <p class="next-eyebrow">How it grows</p>
+        <h2 class="next-title">It gets better on its own.<br />Nobody has to feed it.</h2>
+        <p class="next-copy">
+          Your sources are already connected, so Myynd learns from what people
+          share in the normal course of work. The new price list lands in a
+          thread, and Myynd has the new price list.
+        </p>
+      </div>
+    </section>
+
+    <script src="main.js?v=glass2"></script>
+  </body>
+</html>
