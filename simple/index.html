@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Myynd</title>
+    <meta name="description" content="Myynd is a second you that knows what you’re working on and what matters to you." />
+    <link rel="icon" href="../assets/myynd-mark-navy.svg" type="image/svg+xml" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="simple.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <main class="copy">
+        <a href="./" class="mark" aria-label="Myynd home">
+          <img src="../assets/myynd-mark-navy.svg" alt="" width="44" height="44" class="mark-light" />
+          <img src="../assets/myynd-mark-ivory.svg" alt="" width="44" height="44" class="mark-dark" />
+        </a>
+
+        <div class="text">
+          <p>
+            Myynd is a second you that knows what you’re working on and what
+            matters to you.
+          </p>
+
+          <p>
+            Nothing new to learn. Myynd lives on your Mac, reads your mail,
+            calendar, notes and files, and keeps working while you sleep. You
+            wake up to the work already done.
+          </p>
+
+          <p>
+            It can
+            <a href="#film" class="task" data-at="3">run your scripts</a>,
+            <a href="#film" class="task" data-at="6.5">work the web</a>,
+            <a href="#film" class="task" data-at="10">do the numbers</a>,
+            and <a href="#film" class="task" data-at="13.5">ship your code</a>.
+          </p>
+
+          <button type="button" class="cta" data-open-waitlist>Meet Myynd</button>
+        </div>
+
+        <footer class="foot">
+          <span>Copyright © 2026 Myynd</span>
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms of service</a>
+        </footer>
+      </main>
+
+      <section class="stage" aria-label="Myynd in 20 seconds">
+        <div class="frame">
+          <video
+            id="film"
+            class="film"
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-label="At night, the Myynd mascot works a Mac on its own: it runs scripts in Terminal, downloads invoices from four websites, fills in a spreadsheet and fixes, tests and deploys code. In the morning it shows what it did while you slept."
+          ></video>
+        </div>
+      </section>
+    </div>
+
+    <dialog class="wl" aria-labelledby="wl-title">
+      <button type="button" class="wl-close" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 4 8 8m0-8-8 8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+      </button>
+
+      <div class="buddy" aria-hidden="true">
+        <span class="ha ha-1">ha</span>
+        <span class="ha ha-2">haha</span>
+        <span class="ha ha-3">ha!</span>
+        <span class="ha ha-4">hehe</span>
+        <div class="buddy-body">
+          <img src="assets/mascot-laugh.png" alt="" class="pose pose-laugh" width="219" height="271" />
+          <img src="assets/mascot-giggle.png" alt="" class="pose pose-giggle" width="172" height="293" />
+        </div>
+        <span class="buddy-shadow"></span>
+      </div>
+
+      <div class="wl-form-view">
+        <h2 id="wl-title" class="wl-title">Get your second you.</h2>
+        <p class="wl-sub">Join the waitlist. We’ll write when your Myynd is ready.</p>
+
+        <form class="wl-form" novalidate>
+          <label class="sr-only" for="wl-email">Email</label>
+          <input id="wl-email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@company.com" required />
+          <button type="submit" class="wl-go">Join</button>
+          <p class="wl-msg" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="wl-done-view" hidden>
+        <h2 class="wl-title">You’re in.</h2>
+        <p class="wl-sub">He can’t stop laughing. We’ll write to <b class="wl-who"></b> when your Myynd is ready.</p>
+        <button type="button" class="wl-ok">Back to the video</button>
+      </div>
+    </dialog>
+
+    <script src="simple.js"></script>
+  </body>
+</html>

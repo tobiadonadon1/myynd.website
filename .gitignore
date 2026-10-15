@@ -1,1 +1,4 @@
 .DS_Store
+
+# rendered videos live in simple/media; frames render to a temp folder
+launch-video/*.mp4

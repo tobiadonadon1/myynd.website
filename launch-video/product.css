@@ -1,0 +1,162 @@
+/* A Mac desktop at night (1440 × 906), where Myynd's mascot does the work.
+ * Windows: Terminal, a browser, a spreadsheet, a code editor. Everything is scoped under .dk. */
+.dk{--copper:#B9532E; --copper-2:#D07A4D; --ink:#1D1A18; --soft:#7A6E66; --line:rgba(40,30,20,.1);
+  --mono:'IBM Plex Mono', ui-monospace, monospace; --serif:'Newsreader', Georgia, serif;
+  position:relative; width:100%; height:100%; overflow:hidden; font-family:'Inter', 'Helvetica Neue', Arial, sans-serif; color:var(--ink);
+  background:
+    radial-gradient(900px 620px at 78% 18%, rgba(185,83,46,.42), transparent 70%),
+    radial-gradient(820px 700px at 14% 92%, rgba(57,115,187,.32), transparent 70%),
+    linear-gradient(160deg, #13253B, #0B1726)}
+.dk *{box-sizing:border-box}
+.dk .day-bg{position:absolute; inset:0; opacity:0;
+  background:
+    radial-gradient(760px 560px at 80% 14%, rgba(196,110,78,.75), transparent 70%),
+    radial-gradient(800px 640px at 50% 70%, rgba(214,150,120,.5), transparent 70%),
+    radial-gradient(620px 480px at 12% 90%, rgba(244,222,200,.95), transparent 70%), #E7D4C4}
+
+/* menu bar */
+.mb{position:absolute; left:0; right:0; top:0; height:32px; display:flex; align-items:center; gap:22px; padding:0 18px;
+  background:rgba(8,16,26,.42); backdrop-filter:blur(20px); color:rgba(255,255,255,.92); font-size:14px; font-weight:500; z-index:40}
+.mb img{width:16px; height:16px}
+.mb b{font-weight:700}
+.mb .r{margin-left:auto; display:flex; align-items:center; gap:16px}
+.mb .bot-ic{width:20px; height:20px; border-radius:6px; background:url(assets/bot-front.png) center 20% / 150% no-repeat}
+
+/* dock */
+.dock{position:absolute; left:50%; bottom:10px; transform:translateX(-50%); display:flex; gap:12px; padding:10px 14px; border-radius:24px;
+  background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.2); backdrop-filter:blur(24px); z-index:40}
+.dock span{position:relative; display:grid; place-items:center; width:58px; height:58px; border-radius:15px; color:#fff; font-weight:700; font-size:20px; box-shadow:0 6px 14px rgba(0,0,0,.25)}
+.dock span::after{content:""; position:absolute; bottom:-8px; left:50%; width:5px; height:5px; margin-left:-2.5px; border-radius:50%; background:rgba(255,255,255,.85); opacity:0}
+.dock span.on::after{opacity:1}
+.d-files{background:linear-gradient(180deg,#5FA8F5,#2E73D0)}
+.d-term{background:#1B1B1F; font-family:var(--mono); font-size:18px}
+.d-web{background:linear-gradient(180deg,#F4F4F6,#D9DCE3); color:#2E73D0}
+.d-sheet{background:linear-gradient(180deg,#3FB46A,#22884A)}
+.d-code{background:linear-gradient(180deg,#3C82F6,#1F5BD0); font-family:var(--mono); font-size:17px}
+.d-myynd{background:linear-gradient(140deg,var(--copper-2),var(--copper)) !important; overflow:hidden}
+.d-myynd i{position:absolute; inset:2px 0 -14px; background:url(assets/bot-front.png) center top / 82% no-repeat}
+
+/* windows */
+.win{position:absolute; border-radius:14px; overflow:hidden; box-shadow:0 30px 70px -20px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); visibility:hidden}
+.win .tb{height:40px; display:flex; align-items:center; gap:9px; padding:0 16px; font-size:14px; font-weight:600}
+.win .tb i{width:12px; height:12px; border-radius:50%; background:#FF5F57}
+.win .tb i:nth-child(2){background:#FEBC2E} .win .tb i:nth-child(3){background:#28C840}
+.win .tb span{flex:1; text-align:center; margin-right:60px; opacity:.7}
+
+.w-term{left:60px; top:66px; width:720px; height:410px; background:#16171B; color:#E8E3DD}
+.w-term .tb{background:#1F2025; color:#C9C3BD}
+.w-term pre{margin:0; padding:20px 26px; font:400 19px/1.75 var(--mono); white-space:pre}
+.t-dim{color:#8A847E} .t-ok{color:#8FD07E} .t-p{color:#F5A06A}
+.t-row{display:block}
+
+.w-web{left:540px; top:78px; width:850px; height:470px; background:#fff}
+.w-web .tb{background:#ECEDF1; color:#555}
+.tabs{display:flex; gap:4px; padding:0 12px; background:#ECEDF1}
+.tabs span{padding:9px 16px; border-radius:10px 10px 0 0; font-size:14px; color:#666; background:transparent}
+.tabs span.on{background:#fff; color:#222; font-weight:600}
+.url{margin:10px 16px; padding:9px 14px; border-radius:9px; background:#F2F3F6; font-size:15px; color:#555}
+.page{padding:12px 30px}
+.page h3{margin:0; font-size:28px; font-weight:700; letter-spacing:-.02em}
+.page small{display:block; margin-top:4px; font-size:15px; color:#888}
+.inv{display:flex; align-items:center; gap:16px; padding:15px 0; border-bottom:1px solid #EEE; font-size:18px}
+.inv .amt{margin-left:auto; font-weight:600}
+.inv .dl{width:120px; text-align:center; padding:8px 0; border-radius:999px; border:1px solid #CCD3E0; color:#2E73D0; font-size:15px; font-weight:600}
+.inv .dl.ok{background:#E8F6EC; border-color:#BFE5CA; color:#1E7A43}
+.saved{display:flex; align-items:center; gap:12px; margin-top:20px; padding:14px 18px; border-radius:14px; background:#F6F1EC; font-size:17px}
+.saved b{font-size:22px; font-variant-numeric:tabular-nums}
+
+.w-sheet{left:100px; top:220px; width:820px; height:560px; background:#fff}
+.w-sheet .tb{background:#1F8A4C; color:#fff}
+.w-sheet .tb span{opacity:.95}
+.sh{display:grid; grid-template-columns:1fr 250px; gap:18px; padding:18px}
+.grid{border:1px solid #E3E6EA; border-radius:8px; overflow:hidden; font-size:18px}
+.grid div{display:grid; grid-template-columns:70px 1fr 1fr 90px}
+.grid div span{padding:13px 12px; border-right:1px solid #EEF0F2; border-bottom:1px solid #EEF0F2; font-variant-numeric:tabular-nums}
+.grid div:first-child span{background:#F4F6F8; font-size:14px; font-weight:600; color:#667}
+.grid .now span{background:#FFFBF5}
+.grid .now span.cell{box-shadow:inset 0 0 0 2px #22884A}
+.grid .pos{color:#1E7A43; font-weight:700}
+.chart{border:1px solid #E3E6EA; border-radius:8px; padding:14px; display:flex; flex-direction:column}
+.chart small{font-size:14px; font-weight:600; color:#667}
+.bars{flex:1; display:flex; align-items:flex-end; gap:14px; padding-top:12px}
+.bars div{flex:1; display:flex; flex-direction:column; align-items:center; gap:6px; height:100%; justify-content:flex-end; font-size:13px; color:#889}
+.bars i{display:block; width:100%; border-radius:6px 6px 2px 2px; background:#BFE5CA}
+.bars .now i{background:#22884A}
+
+.w-code{left:590px; top:184px; width:800px; height:570px; background:#1A1B21; color:#DCD7D0}
+.w-code .tb{background:#22232A; color:#AAA}
+.ftab{display:flex; gap:2px; background:#22232A; padding:0 10px}
+.ftab span{padding:9px 16px; font:500 14px var(--mono); color:#999; border-radius:8px 8px 0 0}
+.ftab span.on{background:#1A1B21; color:#EEE}
+.code{padding:16px 0; font:400 18px/1.8 var(--mono)}
+.code div{display:flex; white-space:pre; padding-right:20px}
+.code em{width:56px; flex:none; padding-right:16px; text-align:right; font-style:normal; color:#5D5E68}
+.code .del{background:rgba(220,80,70,.16); color:#F2A39A}
+.code .add{background:rgba(110,200,110,.14); color:#A9E29B}
+.k{color:#F0A27A} .s{color:#B9D48B}
+.term2{margin:6px 18px; padding:14px 18px; border-radius:10px; background:#111216; font:400 17px/1.8 var(--mono)}
+
+/* the morning panel: Myynd's own window */
+.mp{position:absolute; left:430px; top:150px; width:580px; padding:30px 34px 26px; border-radius:26px; background:rgba(253,248,242,.92); border:1px solid rgba(255,255,255,.9);
+  box-shadow:0 30px 70px -24px rgba(90,45,20,.45); visibility:hidden}
+.mp h3{margin:0; font:400 48px/1.05 var(--serif); letter-spacing:-.02em}
+.mp small{display:block; margin-top:8px; font-size:16px; color:var(--soft)}
+.mp div{display:flex; align-items:center; gap:14px; padding:16px 0; border-top:1px solid var(--line); font-size:19px}
+.mp div:first-of-type{margin-top:18px}
+.mp div time{margin-left:auto; font-size:15px; color:var(--soft); font-variant-numeric:tabular-nums}
+.ck{width:22px; height:22px; flex:none; border-radius:50%; background:var(--copper); position:relative}
+.ck::after{content:""; position:absolute; left:7px; top:3.5px; width:5px; height:10px; border:solid #fff; border-width:0 2.2px 2.2px 0; transform:rotate(45deg)}
+
+/* the mascot: position on #bot (left/top), hop on .bot-hop, pose via data-pose */
+.bot{position:absolute; width:140px; height:170px; z-index:45}
+.bot-hop{position:absolute; inset:0; transform-origin:50% 100%}
+.bot-face{position:absolute; inset:0}
+.bot-face img{position:absolute; left:50%; bottom:0; height:170px; width:auto; transform:translateX(-50%); display:none; filter:drop-shadow(0 12px 14px rgba(0,0,0,.35))}
+.bot[data-pose="front"] .p-front, .bot[data-pose="side"] .p-side, .bot[data-pose="back"] .p-back,
+.bot[data-pose="laugh"] .p-laugh, .bot[data-pose="giggle"] .p-giggle{display:block}
+.bot.flip .bot-face{transform:scaleX(-1)}
+.bot-tag{position:absolute; left:50%; top:176px; transform:translateX(-50%); display:flex; align-items:center; gap:9px; white-space:nowrap;
+  padding:9px 16px; border-radius:999px; background:rgba(14,22,34,.86); color:#fff; font-size:16px; font-weight:500; box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.bot-tag i{width:9px; height:9px; border-radius:50%; background:#F5A06A; box-shadow:0 0 0 4px rgba(245,160,106,.22)}
+.bot-tag.done i{background:#8FD07E; box-shadow:0 0 0 4px rgba(143,208,126,.22)}
+
+/* 9:16 shows each window up close; nothing to change in layout */
+
+/* end card call to action (lives in the caption layer) */
+.cta-pill{display:inline-block; margin-top:26px; padding:18px 38px; border-radius:999px; background:var(--accent); color:#fff; font-size:32px; font-weight:600; letter-spacing:-.01em}
+
+/* Myynd's own window: the plan for tonight, and the morning summary */
+.w-app{left:250px; top:96px; width:940px; height:580px; display:flex; gap:0; padding:0; border-radius:20px;
+  background:radial-gradient(520px 420px at 85% 10%, rgba(196,110,78,.5), transparent 70%), radial-gradient(520px 420px at 30% 100%, rgba(244,222,200,.9), transparent 70%), #EBDACB;
+  box-shadow:0 40px 90px -24px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.3)}
+.w-app .lt{position:absolute; top:14px; left:18px; display:flex; gap:8px}
+.w-app .lt i{width:12px; height:12px; border-radius:50%; background:#FF5F57}
+.w-app .lt i:nth-child(2){background:#FEBC2E} .w-app .lt i:nth-child(3){background:#28C840}
+.ap-side{width:230px; margin:40px 0 14px 14px; padding:20px 14px; border-radius:20px; background:rgba(250,243,234,.9); border:1px solid rgba(255,255,255,.9); display:flex; flex-direction:column}
+.ap-side .wm{font-size:26px; font-weight:300; padding:0 6px}
+.ap-nav{display:flex; flex-direction:column; gap:4px; margin-top:24px}
+.ap-nav span{display:flex; align-items:center; gap:11px; height:42px; padding:0 13px; border-radius:13px; font-size:16px; color:#4A3F38}
+.ap-nav span.on{color:#fff; background:linear-gradient(100deg,var(--copper),var(--copper-2)); box-shadow:0 8px 18px rgba(185,83,46,.3)}
+.ap-nav b{margin-left:auto; font-size:13px}
+.ap-me{margin-top:auto; display:flex; align-items:center; gap:10px; padding:10px; border-radius:14px; background:rgba(255,252,248,.9); font-size:14px; color:var(--soft)}
+.ap-me i{width:30px; height:30px; border-radius:50%; background:linear-gradient(140deg,#C56A45,#9C4527)}
+.ap-main{flex:1; padding:52px 34px 20px 30px}
+.ap-main h3{margin:0; font:400 54px/1 var(--serif); letter-spacing:-.02em}
+.ap-pill{display:inline-flex; margin-top:14px; padding:8px 15px; border-radius:999px; background:rgba(253,248,242,.85); font-size:16px; color:#5D5048}
+.ap-list{margin-top:24px; padding:6px 24px; border-radius:20px; background:rgba(253,248,242,.88); border:1px solid rgba(255,255,255,.9); box-shadow:0 12px 30px rgba(120,70,40,.12)}
+.ap-row{display:flex; align-items:center; gap:14px; padding:17px 0; border-top:1px solid var(--line); font-size:19px}
+.ap-row:first-child{border-top:0}
+.ap-row .ring{width:22px; height:22px; flex:none; border-radius:50%; border:2px solid rgba(185,83,46,.5); position:relative}
+.ap-row.done .ring{background:var(--copper); border-color:var(--copper)}
+.ap-row.done .ring::after{content:""; position:absolute; left:6.5px; top:3px; width:5px; height:10px; border:solid #fff; border-width:0 2.2px 2.2px 0; transform:rotate(45deg)}
+.ap-st{margin-left:auto; padding:5px 12px; border-radius:999px; font-size:14px; font-weight:600; background:rgba(120,100,90,.12); color:var(--soft); white-space:nowrap}
+.ap-st.run{background:rgba(245,160,106,.22); color:#A14523}
+.ap-st.ok{background:var(--copper); color:#fff}
+
+/* a note to Myynd, shown above the code editor */
+.w-ask{position:absolute; left:640px; top:56px; width:560px; padding:16px 20px; display:flex; gap:14px; align-items:center; border-radius:18px;
+  background:rgba(253,248,242,.96); box-shadow:0 20px 50px -16px rgba(0,0,0,.55); visibility:hidden; z-index:20}
+.w-ask .av{width:46px; height:46px; flex:none; border-radius:14px; background:linear-gradient(140deg,var(--copper-2),var(--copper)); position:relative; overflow:hidden}
+.w-ask .av i{position:absolute; inset:3px 0 -12px; background:url(assets/bot-front.png) center top / 80% no-repeat}
+.w-ask small{display:block; font-size:14px; color:var(--soft)}
+.w-ask b{display:block; margin-top:3px; font-size:19px; font-weight:500}

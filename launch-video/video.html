@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Launch Video</title>
+<!-- The brand font is loaded by engine.js from VIDEO.brand.fontUrl in scenes.js. Product styles live in product.css. -->
+<link rel="stylesheet" href="product.css">
+<style>
+/* ---------- video design system (brand values come from VIDEO.brand) ---------- */
+:root{
+  --stage:#F5F3EF; --night:#0F0E1C; --ink:#15131F; --muted:#5E5A73;
+  --accent:#2251E8; --accent-dark:#9DB2FF; --callout:var(--accent);
+  --font:'Lexend', system-ui, -apple-system, sans-serif;
+}
+*{box-sizing:border-box}
+html, body{margin:0; height:100%; background:#000; overflow:hidden}
+body{-webkit-font-smoothing:antialiased}
+#stage{position:absolute; left:0; top:0; width:1920px; height:1080px; overflow:hidden; transform-origin:0 0; background:var(--stage); font-family:var(--font); color:var(--ink)}
+.layer{position:absolute; inset:0}
+.glow{position:absolute; inset:0; opacity:0}
+#dark{position:absolute; inset:0; background:var(--night); opacity:0}
+#darkglow{position:absolute; inset:0; opacity:.7}
+#scrim{opacity:0; pointer-events:none}
+/* paint order: background, devices, scrim, callouts, captions, touch. Rig z-indexes only order devices among themselves. */
+#glows{z-index:0} #dark{z-index:0} #rigs{z-index:1} #scrim{z-index:2} #callouts{z-index:3} #caps{z-index:4} .tap{z-index:5}
+
+/* ---------- captions: eyebrow (number + feature), headline revealed line by line, one line of detail ---------- */
+.cap{position:absolute; display:flex; flex-direction:column; pointer-events:none; font-family:var(--font)}
+[data-format="16x9"] .cap{left:150px; top:0; height:100%; width:660px; justify-content:center}
+[data-format="9x16"] .cap{left:90px; right:90px; top:150px; justify-content:flex-start}
+.eyebrow{display:flex; align-items:center; gap:14px; font-size:19px; font-weight:600; letter-spacing:.18em; text-transform:uppercase; color:var(--accent); margin-bottom:30px}
+[data-format="9x16"] .eyebrow{font-size:24px; margin-bottom:34px}
+.eyebrow .num{border:1.5px solid currentColor; border-radius:999px; padding:5px 12px 4px; letter-spacing:.06em; font-size:.9em}
+.headline{font-size:84px; font-weight:300; letter-spacing:-.035em; line-height:1.08; color:var(--ink)}
+[data-format="9x16"] .headline{font-size:96px}
+.headline b{font-weight:700}
+/* clip-path, not overflow:hidden: it hides the line below its box for the reveal without cutting long lines on the sides */
+.headline .mask{display:block; clip-path:inset(-.1em -2000px -.2em -2000px)}
+.headline .mask > span{display:block; white-space:nowrap}
+.sub{font-size:28px; font-weight:400; line-height:1.45; color:var(--muted); margin:34px 0 0; max-width:580px}
+[data-format="9x16"] .sub{font-size:34px; max-width:880px; margin-top:38px}
+.cap.dark .eyebrow{color:var(--accent-dark)}
+.cap.dark .headline{color:#FFFFFF}
+.cap.dark .sub{color:rgba(255,255,255,.72)}
+[data-format="16x9"] .cap.center{left:0; right:0; width:auto; top:92px; height:auto; align-items:center; text-align:center}
+[data-format="9x16"] .cap.center{left:60px; right:60px; top:170px; align-items:center; text-align:center}
+
+/* ---------- callouts and touches ---------- */
+.callout{position:absolute; width:0; height:0; pointer-events:none}
+.callout .dot{position:absolute; left:-8px; top:-8px; width:16px; height:16px; border-radius:50%; background:var(--callout); box-shadow:0 0 0 4px #FFFFFF, 0 6px 16px rgba(21,19,31,.25)}
+.callout .line{position:absolute; background:var(--callout)}
+.callout .lbl{position:absolute; background:#FFFFFF; color:#15131F; font-family:var(--font); font-size:23px; font-weight:500; padding:12px 20px; border-radius:999px; box-shadow:0 14px 34px -12px rgba(21,19,31,.35); white-space:nowrap}
+[data-format="9x16"] .callout .lbl{font-size:26px}
+.tap{position:absolute; width:58px; height:58px; margin:-29px 0 0 -29px; border-radius:50%; background:rgba(21,19,31,.16); border:2px solid rgba(255,255,255,.95); box-shadow:0 6px 18px rgba(21,19,31,.22); opacity:0; pointer-events:none}
+
+/* ---------- rigs and devices (a rig is moved by its camera; the device inside is centered on the rig origin) ---------- */
+.rig{position:absolute; left:0; top:0; width:0; height:0; transform-origin:0 0; will-change:transform}
+.dev{position:absolute}
+.dev .inner{position:absolute; left:0; top:0; overflow:hidden}
+
+.dev.phone{width:430px; height:880px; left:-215px; top:-440px; border-radius:68px; background:#1A1922; padding:12px;
+  box-shadow:0 0 0 1.5px #3B394D, inset 0 0 0 2px #2C2A3B, 0 60px 110px -40px rgba(21,19,31,.45), 0 30px 50px -30px rgba(21,19,31,.25)}
+.dev.phone .scr{position:relative; width:406px; height:856px; border-radius:57px; overflow:hidden; background:#FFFFFF; color:#15131F}
+.dev.phone .island{position:absolute; left:50%; top:12px; width:118px; height:34px; margin-left:-59px; border-radius:20px; background:#000; z-index:30}
+.dev.phone .sbar{position:absolute; left:0; right:0; top:0; height:52px; display:flex; justify-content:space-between; align-items:center; padding:6px 34px 0 42px; font:600 16px -apple-system, system-ui, sans-serif; z-index:20}
+.dev.phone .sbar .ic{display:flex; gap:6px; align-items:center}
+.dev.phone .sbar svg{fill:currentColor}
+.dev.phone .inner{top:52px; width:406px; height:804px}
+.dev.phone .homeind{position:absolute; left:50%; bottom:8px; width:136px; height:5px; margin-left:-68px; border-radius:3px; background:#15131F; z-index:20}
+
+.dev.laptop{width:1240px; left:-620px; top:-415px}
+.dev.laptop .lid{position:relative; width:1240px; height:800px; border-radius:34px 34px 10px 10px; background:#1A1922; padding:22px 22px 26px; box-shadow:inset 0 0 0 2px #34324A, 0 50px 90px -40px rgba(21,19,31,.45)}
+.dev.laptop .cam{position:absolute; left:50%; top:9px; width:7px; height:7px; margin-left:-3.5px; border-radius:50%; background:#2B2940}
+.dev.laptop .mscr{position:relative; width:1196px; height:752px; overflow:hidden; border-radius:8px; background:#FFFFFF}
+.dev.laptop .inner{width:1440px; height:906px; transform:scale(.8306); transform-origin:0 0; background:#FFFFFF}
+.dev.laptop .base{position:relative; width:1420px; height:30px; margin-left:-90px; border-radius:2px 2px 20px 20px; background:linear-gradient(#E1DFEA, #ABA8BE); box-shadow:0 40px 60px -30px rgba(21,19,31,.45)}
+.dev.laptop .base::before{content:""; position:absolute; left:50%; top:0; width:220px; height:12px; margin-left:-110px; border-radius:0 0 14px 14px; background:#C3C0D2}
+
+.dev.browser{width:1320px; height:860px; left:-660px; top:-430px; border-radius:16px; background:#FFFFFF; overflow:hidden;
+  box-shadow:0 0 0 1px rgba(21,19,31,.08), 0 60px 110px -40px rgba(21,19,31,.4), 0 30px 50px -30px rgba(21,19,31,.2)}
+.dev.browser .bar{position:absolute; left:0; right:0; top:0; height:48px; background:#F1F0F4; border-bottom:1px solid rgba(21,19,31,.08); display:flex; align-items:center; gap:18px; padding:0 18px}
+.dev.browser .lights{display:flex; gap:8px}
+.dev.browser .lights i{display:block; width:12px; height:12px; border-radius:50%; background:#FF5F57}
+.dev.browser .lights i:nth-child(2){background:#FEBC2E}
+.dev.browser .lights i:nth-child(3){background:#28C840}
+.dev.browser .url{flex:0 1 520px; margin:0 auto; transform:translateX(-40px); height:30px; border-radius:8px; background:#FFFFFF; border:1px solid rgba(21,19,31,.08); display:flex; align-items:center; justify-content:center; font:500 14px -apple-system, system-ui, sans-serif; color:#5E5A73}
+.dev.browser .bscr{position:absolute; left:0; top:48px; width:1320px; height:812px; overflow:hidden}
+.dev.browser .inner{width:1440px; height:886px; transform:scale(.91667); transform-origin:0 0; background:#FFFFFF}
+
+#playbtn{position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.55); color:#fff; font:600 26px system-ui, sans-serif; z-index:1000; cursor:pointer}
+</style>
+</head>
+<body>
+<div id="stage">
+  <div class="layer" id="glows"></div>
+  <div id="dark"><div id="darkglow"></div></div>
+  <div class="layer" id="rigs"></div>
+  <div class="layer" id="scrim"></div>
+  <div class="layer" id="callouts"></div>
+  <div class="tap" id="tap"></div>
+  <div class="layer" id="caps"></div>
+</div>
+<div id="playbtn">Click to play with sound</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="engine.js"></script>
+<script src="product.js"></script>
+<script src="scenes.js"></script>
+</body>
+</html>
